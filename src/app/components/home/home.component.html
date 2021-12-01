@@ -1,0 +1,70 @@
+<div class="container shadow-lg h-auto my-3 rounded-md">
+  <div class="bg-white text-gray-600 p-5 space-y-3">
+    <h2 class="text-2xl text-red-400">This is heading</h2>
+    <div class="flex space-x-2">
+      <div class="w-1/4 border-2 border-gray-600 p-3 rounded-lg">
+        <h1>this is category</h1>
+        <div class="flex flex-col mt-3">
+          <!-- <a href="#" *ngFor="let game of games">{{ game.genre }}</a> -->
+          <a href="#">Category</a>
+        </div>
+      </div>
+      <div
+        class="
+          w-3/4
+          border-2 border-gray-600
+          p-3
+          rounded-lg
+          h-auto
+          grid grid-cols-2
+          gap-3
+        "
+      >
+        <div
+          *ngFor="
+            let game of games | paginate: { itemsPerPage: 6, currentPage: p }
+          "
+          class="shadow-md rounded-lg bg-gray-700 cursor-pointer"
+          [routerLink]="['details', game.id]"
+        >
+          <img src="{{ game.thumbnail }}" class="rounded-t-lg w-full" alt="" />
+          <div class="m-2">
+            <div class="flex space-x-2">
+              <p
+                class="rounded-full bg-gray-400 text-gray-800 text-sm py-1 px-2"
+              >
+                {{ game.genre }}
+              </p>
+              <p
+                class="rounded-full bg-gray-400 text-gray-800 text-sm py-1 px-2"
+              >
+                {{ game.platform }}
+              </p>
+              <p
+                class="rounded-full bg-gray-400 text-gray-800 text-sm py-1 px-2"
+              >
+                {{ game.publisher }}
+              </p>
+            </div>
+
+            <div class="text-gray-500 space-y-2 p-3">
+              <h2 class="text-xl font-bold">
+                {{ game.title }}
+              </h2>
+              <p>{{ game.short_description }}</p>
+              <p>{{ game.release_date }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-2">
+    <div class="">
+      <pagination-controls
+        class="my-pagination text-center text-indigo-600"
+        (pageChange)="p = $event"
+      ></pagination-controls>
+    </div>
+  </div>
+</div>
